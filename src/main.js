@@ -296,12 +296,12 @@ export default class Auth {
 		});
 
 		// Now, get the user profile.
-		await this.fetchProfile({ idToken, refreshToken, expiresAt });
+		const profile = await this.fetchProfile({ idToken, refreshToken, expiresAt });
 
 		// Remove sensitive data from the URLSearch params in the location bar.
 		history.replaceState(null, null, location.origin + location.pathname);
 
-		return context;
+		return { context, profile };
 	}
 
 	/**
